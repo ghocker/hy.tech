@@ -1,3 +1,31 @@
+<?php
+session_start();
+if (!isset($_SESSION["login"])){
+    header("Location: ../login.php");
+    exit;
+}
+require '../function.php';
+$id= $_SESSION["login"];
+$pemilik = query("SELECT * FROM akunpemilik WHERE username = '$id'")[0];
+if (isset($_POST["submit"]) ){
+    if (ubahpemilik($_POST) > 0){
+        echo "
+            <script>
+                alert('data berhasil diubah')
+                document.location.href = '../logout.php';
+            </script>
+            ";
+    }else{
+         echo "
+            <script>
+                alert('data gagal diubah')
+                document.location.href = '../logout.php';
+            </script>
+            ";
+        }
+    
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +70,7 @@
     <section class="text-center" style="padding-top:5rem;">
         <img src="../img/hy.tech.jpg" alt="logo" width="200"
             class="rounded-circle img-thumbnail border border-success border-4" />
-        <h3 class="pt-2">Ubah Akun Pekerja</h3>
+        <h3 class="pt-2">Ubah Akun Pemilik</h3>
     </section>
     <!-- akhir jumbotron -->
     <!-- awal badan -->

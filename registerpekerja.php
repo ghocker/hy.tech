@@ -1,3 +1,22 @@
+<?php
+session_start();
+if (!isset($_SESSION["login"])){
+    header("Location: login.php");
+    exit;
+}
+require 'function.php';
+if (isset($_POST["submit"])){
+    if(registrasipekerja($_POST) > 0) {
+        echo "<script>
+        alert('user berhasil ditambahkan')
+        document.location.href = 'login.php';
+    </script>";
+    }else{
+        echo mysqli_error($conn);
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +29,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <!-- link css -->
-    <link rel="stylesheet" href="css/styleregpekerj.css">
+    <link rel="stylesheet" href="css/styleregpekerja.css">
 
 </head>
 
@@ -34,6 +53,14 @@
                     </div>
                 </div>
                 <form action="" method="post" class="form">
+                    <label for="nama" style="padding-top:22px">&nbsp;Nama
+                    </label>
+                    <input id="nama" class="form-content" type="text" name="nama" required />
+                    <div class="form-border"></div>
+                    <label for="email" style="padding-top:22px">&nbsp;Email
+                    </label>
+                    <input id="email" class="form-content" type="email" name="email" required />
+                    <div class="form-border"></div>
                     <label for="user-email" style="padding-top:8px">
                         &nbsp;Username
                     </label>
@@ -48,9 +75,10 @@
                     </label>
                     <input id="user-password2" class="form-content" type="password" name="password2" required />
                     <div class="form-border"></div>
-                    <!-- <a href="#">
-                        <legend id="forgot-pass">Forgot password?</legend>
-                    </a> -->
+                    <label for="alamat" style="padding-top:22px">&nbsp;Alamat
+                    </label>
+                    <input id="alamat" class="form-content" type="text" name="alamat" required />
+                    <div class="form-border"></div>
                     <input id="submit-btn" type="submit" name="submit" value="REGISTER" />
                     <a href="pagepemilik/akun.php" id="signup">batalkan</a>
                 </form>

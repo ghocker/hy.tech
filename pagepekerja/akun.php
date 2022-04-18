@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["login"])){
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,10 +57,12 @@
     <section>
         <div class="container text-center">
             <div class="row p-3">
-                <a href="ubahpekerja.php"><button type="button" class="btn btn-success">Ubah Data Akun</button></a>
+                <a href="ubahpekerja.php"><button type="button" class="btn btn-success"
+                        style="width : 600px; height :50px;">Ubah Data Akun</button></a>
             </div>
             <div class="row ">
-                <a href="../logout.php"><button type="button" class="btn btn-success">LOG OUT</button></a>
+                <a href="../logout.php"><button type="button" class="btn btn-success"
+                        style="width : 600px; height :50px;">LOG OUT</button></a>
             </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])){
+    header("Location: login.php");
+    exit;
+}
 function hari_ini(){
 	$hari = date ("D");
  
@@ -144,7 +149,24 @@ function salam($sal){
     <section>
         <div class="row">
             <div class="class text-center">
-                <h3>Fitur Utama</h3>
+                <h3>Tujuan HY.TECH</h3>
+            </div>
+            <div class="row text-center">
+                <ul>
+                    <li>
+                        Mempermudah pemilik lahan dalam mengontrol waktu pengelolaan tanaman hidroponik
+                    </li>
+                    <li>
+                        Membantu pemilik lahan dalam memprediksi kebutuhan dalam proses penanganan masalah pembudidayaan
+                        tanaman hidroponik yang kurang efisien
+                    </li>
+                    <li>
+                        Meningkatkan keefektifan waktu produksi tanaman hidroponik
+                    </li>
+                    <li>
+                        Memperkenalkan mitra di bidang teknologi hidroponik yang lebih luas.
+                    </li>
+                </ul>
             </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

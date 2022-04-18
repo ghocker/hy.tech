@@ -1,3 +1,36 @@
+<?php
+session_start();
+
+require 'function.php';
+
+if (isset($_POST["submit"])){
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $result = mysqli_query($conn, "SELECT * FROM akunpekerja WHERE username = '$username'");
+    $result2 = mysqli_query($conn, "SELECT * FROM akunpemilik WHERE username = '$username'");
+    if (mysqli_num_rows($result)== 1){
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row["password"])){
+            $_SESSION["login"] = $username;
+            header("Location: indexpekerja.php");
+            exit;
+        }
+
+    }else if (mysqli_num_rows($result2)== 1){
+        $row = mysqli_fetch_assoc($result2);
+        if (password_verify($password, $row["password"])){
+            $_SESSION["login"] = $username;
+            header("Location: index.php");
+            exit;
+        }
+
+    }
+    $error = true;
+    echo "<script>
+            alert('username/password tidak sesuai')
+            </script>";
+}
+?>
 <!DOCTYPE html>
 <html>
 

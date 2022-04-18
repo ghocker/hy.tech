@@ -1,3 +1,31 @@
+<?php
+session_start();
+if (!isset($_SESSION["login"])){
+    header("Location: ../login.php");
+    exit;
+}
+require '../function.php';
+$id= $_GET["nama"];
+$akun = query("SELECT * FROM akunpekerja WHERE username = '$id'")[0];
+if (isset($_POST["submit"]) ){
+    if (ubahpekerja($_POST) > 0){
+        echo "
+            <script>
+                alert('data berhasil diubah')
+                document.location.href = '../logout.php';
+            </script>
+            ";
+    }else{
+         echo "
+            <script>
+                alert('data gagal diubah')
+                document.location.href = '../logout.php';
+            </script>
+            ";
+        }
+    
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

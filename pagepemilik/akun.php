@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["login"])){
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,19 +57,24 @@
     <section>
         <div class="container text-center">
             <div class="row p-2">
-                <a href="ubahpemilik.php"><button type="button" class="btn btn-success">Ubah Data Akun
+                <a href="ubahpemilik.php"><button type="button" class="btn btn-success"
+                        style="width : 600px; height :50px;">Ubah Data
+                        Akun
                         Pemilik</button></a>
             </div>
             <div class="row p-2">
-                <a href="../registerpekerja.php"><button type="button" class="btn btn-success">Tambah Data Akun
+                <a href="../registerpekerja.php"><button type="button" class="btn btn-success"
+                        style="width : 600px; height :50px;">Tambah Data Akun
                         Pekerja</button></a>
             </div>
             <div class="row p-2">
-                <a href="lihatakunpekerja.php"><button type="button" class="btn btn-success">Ubah Data Akun
+                <a href="lihatakunpekerja.php"><button type="button" class="btn btn-success"
+                        style="width : 600px; height :50px;">Ubah Data Akun
                         Pekerja</button></a>
             </div>
             <div class="row p-2">
-                <a href="../logout.php"><button type="button" class="btn btn-success">LOG OUT</button></a>
+                <a href="../logout.php"><button type="button" class="btn btn-success"
+                        style="width : 600px; height :50px;">LOG OUT</button></a>
             </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

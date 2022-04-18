@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION["login"])){
+    header("Location: ../login.php");
+    exit;
+}
+require '../function.php';
+$akunpekerja = query('SELECT * FROM akunpekerja');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
