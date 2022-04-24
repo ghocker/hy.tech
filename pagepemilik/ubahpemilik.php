@@ -12,14 +12,14 @@ if (isset($_POST["submit"]) ){
         echo "
             <script>
                 alert('data berhasil diubah')
-                document.location.href = '../logout.php';
+                document.location.href = 'akun.php';
             </script>
             ";
     }else{
          echo "
             <script>
                 alert('data gagal diubah')
-                document.location.href = '../logout.php';
+                document.location.href = 'akun.php';
             </script>
             ";
         }
@@ -59,7 +59,10 @@ if (isset($_POST["submit"]) ){
                         <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="pagepemilik/akun.php">Akun</a>
+                        <a class="nav-link" href="lahan.php">Lahan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="akun.php">Akun</a>
                     </li>
                 </ul>
             </div>
@@ -70,7 +73,7 @@ if (isset($_POST["submit"]) ){
     <section class="text-center" style="padding-top:5rem;">
         <img src="../img/hy.tech.jpg" alt="logo" width="200"
             class="rounded-circle img-thumbnail border border-success border-4" />
-        <h3 class="pt-2">Ubah Akun Pemilik</h3>
+        <h3 class="pt-2">Ubah Akun Pekerja</h3>
     </section>
     <!-- akhir jumbotron -->
     <!-- awal badan -->

@@ -12,14 +12,14 @@ if (isset($_POST["submit"]) ){
         echo "
             <script>
                 alert('data berhasil diubah')
-                document.location.href = '../logout.php';
+                document.location.href = 'akun.php';
             </script>
             ";
     }else{
          echo "
             <script>
                 alert('data gagal diubah')
-                document.location.href = '../logout.php';
+                document.location.href = 'akun.php';
             </script>
             ";
         }
@@ -59,7 +59,10 @@ if (isset($_POST["submit"]) ){
                         <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="pagepemilik/akun.php">Akun</a>
+                        <a class="nav-link" href="lahan.php">Lahan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="akun.php">Akun</a>
                     </li>
                 </ul>
             </div>

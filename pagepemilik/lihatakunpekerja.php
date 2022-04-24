@@ -40,7 +40,10 @@ $akunpekerja = query('SELECT * FROM akunpekerja');
                         <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="pagepemilik/akun.php">Akun</a>
+                        <a class="nav-link" href="lahan.php">Lahan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="akun.php">Akun</a>
                     </li>
                 </ul>
             </div>

@@ -120,5 +120,39 @@ function hapus($id){
     global $conn;
     mysqli_query($conn, "DELETE FROM akunpekerja WHERE username = '$id'");
     return mysqli_affected_rows($conn);
-}   
+}  
+function tambahlahan($data) {
+    global $conn;
+    $nama = htmlspecialchars($data["nama"]);
+    $lokasi = htmlspecialchars($data["lokasi"]);
+    $kapasitas = htmlspecialchars($data["kapasitas"]);
+    $luas = htmlspecialchars($data["luas"]);
+    $tanaman = htmlspecialchars($data["tanaman"]);
+    mysqli_query($conn, "INSERT INTO lahan VALUES ('','$nama','$lokasi','$kapasitas','$luas','$tanaman')");
+    return mysqli_affected_rows($conn);
+} 
+function ubahlahan($data){
+    global $conn;
+    $id = $data["id"];
+    $nama = htmlspecialchars($data["nama"]);
+    $lokasi = htmlspecialchars($data["lokasi"]);
+    $kapasitas = htmlspecialchars($data["kapasitas"]);
+    $luas = htmlspecialchars($data["luas"]);
+    $tanaman = htmlspecialchars($data["tanaman"]);
+    $query = "UPDATE lahan SET 
+    nama_lahan = '$nama',
+    lokasi = '$lokasi', 
+    kapasitas = $kapasitas,
+    luas = $luas,
+    tanaman = '$tanaman'
+    WHERE nama_lahan = '$id'
+    ";
+mysqli_query($conn,$query);
+return mysqli_affected_rows($conn);
+}
+function hapuslahan($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM lahan WHERE nama_lahan = '$id'");
+    return mysqli_affected_rows($conn);
+}  
 ?>

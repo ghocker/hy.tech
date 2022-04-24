@@ -38,7 +38,10 @@ if (!isset($_SESSION["login"])){
                         <a class="nav-link" href="../indexpekerja.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="pagepekerja/akun.php">Akun</a>
+                        <a class="nav-link" href="lahan.php">Lahan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="akun.php">Akun</a>
                     </li>
                 </ul>
             </div>
