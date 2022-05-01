@@ -86,15 +86,15 @@ if (isset($_POST["submit"]) ){
                 </div>
                 <div class="row mb-3">
                     <label for="kapasitas">Masukkan Kapasitas Lahan (lubang) :</label>
-                    <input type="text" class="text-center" name="kapasitas" id="kapasitas">
+                    <input type="number" class="text-center" name="kapasitas" id="kapasitas" required>
                 </div>
                 <div class="row mb-3">
                     <label for="luas">Masukkan Luas Lahan (m2) :</label>
-                    <input type="text" class="text-center" name="luas" id="luas">
+                    <input type="number" class="text-center" name="luas" id="luas" required>
                 </div>
                 <div class="row mb-3">
                     <label for="tanaman">Masukkan Nama Tanaman :</label>
-                    <input type="text" class="text-center" name="tanaman" id="tanaman">
+                    <input type="text" class="text-center" name="tanaman" id="tanaman" required>
                 </div>
                 <div class="row mb-3" style="display:inline;">
                     <a href="lahan.php"><button type="button" class="btn btn-danger">BATAL</button></a>

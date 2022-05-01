@@ -128,6 +128,19 @@ function tambahlahan($data) {
     $kapasitas = htmlspecialchars($data["kapasitas"]);
     $luas = htmlspecialchars($data["luas"]);
     $tanaman = htmlspecialchars($data["tanaman"]);
+    $result = mysqli_query($conn, "SELECT * FROM lahan WHERE nama_lahan = '$username'");
+    $sql1 = "SELECT * FROM lahan";
+    $result1 = $conn->query($sql1);
+    while($user = $result1->fetch_assoc()){
+        if ($nama == $user["nama_lahan"]){
+            echo "
+                <script>
+                    alert('nama lahan sudah ada')
+                    document.location.href = 'lahan.php';
+                </script>
+                ";
+        }
+    }
     mysqli_query($conn, "INSERT INTO lahan VALUES ('','$nama','$lokasi','$kapasitas','$luas','$tanaman')");
     return mysqli_affected_rows($conn);
 } 
@@ -139,6 +152,18 @@ function ubahlahan($data){
     $kapasitas = htmlspecialchars($data["kapasitas"]);
     $luas = htmlspecialchars($data["luas"]);
     $tanaman = htmlspecialchars($data["tanaman"]);
+    $sql1 = "SELECT * FROM lahan";
+    $result1 = $conn->query($sql1);
+    while($user = $result1->fetch_assoc()){
+        if ($nama == $user["nama_lahan"]){
+            echo "
+                <script>
+                    alert('nama lahan sudah ada')
+                    document.location.href = 'lahan.php';
+                </script>
+                ";
+        }
+    }
     $query = "UPDATE lahan SET 
     nama_lahan = '$nama',
     lokasi = '$lokasi', 

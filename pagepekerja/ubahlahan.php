@@ -91,12 +91,12 @@ if (isset($_POST["submit"]) ){
                 </div>
                 <div class="row mb-3">
                     <label for="kapasitas">Masukkan Kapasitas Lahan (lubang) :</label>
-                    <input type="text" class="text-center" name="kapasitas" id="kapasitas" required
+                    <input type="number" class="text-center" name="kapasitas" id="kapasitas" required
                         value="<?=$lahan["kapasitas"]?>">
                 </div>
                 <div class="row mb-3">
                     <label for="luas">Masukkan Luas Lahan (m2) :</label>
-                    <input type="text" class="text-center" name="luas" id="luas" required value="<?=$lahan["luas"]?>">
+                    <input type="number" class="text-center" name="luas" id="luas" required value="<?=$lahan["luas"]?>">
                 </div>
                 <div class="row mb-3">
                     <label for="tanaman">Masukkan Nama Tanaman :</label>
