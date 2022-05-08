@@ -40,10 +40,10 @@ $data_lahan = query('SELECT * FROM lahan');
                         <a class="nav-link" href="../indexpekerja.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="lahan.php">Lahan</a>
+                        <a class="nav-link" href="lahan.php">Lahan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="aktivitas.php">Aktivitas</a>
+                        <a class="nav-link active" aria-current="page" href="aktivitas.php">Aktivitas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="akun.php">Akun</a>
@@ -55,12 +55,44 @@ $data_lahan = query('SELECT * FROM lahan');
     <!-- akhir navbar -->
     <!-- awal jumbotron -->
     <section class="text-center mb-5" style="padding-top:5rem;">
-        <h3 class="pt-2">DAFTAR LAHAN</h3>
+        <h3 class="pt-2">AKTIVITAS LAHAN</h3>
     </section>
     <!-- akhir jumbotron -->
     <!-- awal badan -->
     <section>
-        <div class="container">
+        <div class="container justifiy-content-center text-center">
+            <nav class="navbar navbar-expand-lg navbar-light justify-content-center text-center">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item me-5">
+                                <a class="nav-link active" aria-current="page" href="#"
+                                    style="color : #2dbd6e;">Pembibitan</a>
+                                <div class="form-border"
+                                    style="background: -webkit-linear-gradient(right, #a6f77b, #2ec06f); height: 2px; width: 100%;">
+                                </div>
+                            </li>
+                            <li class="nav-item me-5">
+                                <a class="nav-link" href="#" style="color : #2dbd6e;">Masuk lahan</a>
+                            </li>
+                            <li class="nav-item me-5">
+                                <a class="nav-link" href="#" style="color : #2dbd6e;">Penutrisian</a>
+                            </li>
+                            <li class="nav-item me-5">
+                                <a class="nav-link" style="color : #2dbd6e;">Panen</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container mt-4">
             <?php foreach ($data_lahan as $row) :?>
             <div class="row mb-3">
                 <div class="card p-0">
@@ -73,18 +105,12 @@ $data_lahan = query('SELECT * FROM lahan');
                         <p class="card-text p-0 m-0">Luas : <?=$row["luas"]?> m2</p>
                         <p class="card-text p-0 m-0">Lokasi : <?=$row["lokasi"]?></p>
                         <div class="text-end">
-                            <a href="hapuslahan.php?nama=<?= $row["nama_lahan"];?>" class="btn btn-danger">Hapus</a>
-                            <a href="ubahlahan.php?nama=<?= $row["nama_lahan"];?>" class="btn btn-warning">Ubah</a>
+                            <a href="ubahlahan.php?nama=<?= $row["nama_lahan"];?>" class="btn btn-success">selesai</a>
                         </div>
                     </div>
                 </div>
             </div>
             <?php endforeach;?>
-            <div class="row justify-content-center">
-                <div class="class pt-5 text-center">
-                    <a href="tambahlahan.php" class="btn btn-success">Tambah Data Lahan</a>
-                </div>
-            </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#198754" fill-opacity="1"
