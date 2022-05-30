@@ -127,7 +127,6 @@ function tambahlahan($data) {
     $lokasi = htmlspecialchars($data["lokasi"]);
     $kapasitas = htmlspecialchars($data["kapasitas"]);
     $luas = htmlspecialchars($data["luas"]);
-    $tanaman = htmlspecialchars($data["tanaman"]);
     $result = mysqli_query($conn, "SELECT * FROM lahan WHERE nama_lahan = '$username'");
     $sql1 = "SELECT * FROM lahan";
     $result1 = $conn->query($sql1);
@@ -139,9 +138,10 @@ function tambahlahan($data) {
                     document.location.href = 'lahan.php';
                 </script>
                 ";
+                exit;
         }
     }
-    mysqli_query($conn, "INSERT INTO lahan VALUES ('','$nama','$lokasi','$kapasitas','$luas','$tanaman')");
+    mysqli_query($conn, "INSERT INTO lahan VALUES ('','$nama','$lokasi','$kapasitas','$luas',NULL,NULL,NULL,NULL,NULL,NULL)");
     return mysqli_affected_rows($conn);
 } 
 function ubahlahan($data){
@@ -151,33 +151,173 @@ function ubahlahan($data){
     $lokasi = htmlspecialchars($data["lokasi"]);
     $kapasitas = htmlspecialchars($data["kapasitas"]);
     $luas = htmlspecialchars($data["luas"]);
-    $tanaman = htmlspecialchars($data["tanaman"]);
     $sql1 = "SELECT * FROM lahan";
     $result1 = $conn->query($sql1);
     while($user = $result1->fetch_assoc()){
-        if ($nama == $user["nama_lahan"]){
+        if ($nama == $id){
+            $query = "UPDATE lahan SET 
+    nama_lahan = '$nama',
+    lokasi = '$lokasi', 
+    kapasitas = $kapasitas,
+    luas = $luas
+    WHERE nama_lahan = '$id'
+    ";
+    mysqli_query($conn,$query);
+    return mysqli_affected_rows($conn);
+        }
+        else if ($nama == $user["nama_lahan"]){
             echo "
                 <script>
                     alert('nama lahan sudah ada')
                     document.location.href = 'lahan.php';
                 </script>
                 ";
+                exit;
+        }
+    }
+}
+function hapuslahan($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM lahan WHERE nama_lahan = '$id'");
+    return mysqli_affected_rows($conn);
+}  
+function tanaman($data){
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $id = $data["id"];
+    $tanaman = htmlspecialchars($data["tanaman"]);
+    $proses = 'penyemaian';
+    $penyemaian = date("Y-m-d H:i:s");
+    $sql1 = "SELECT * FROM lahan";
+    $result1 = $conn->query($sql1);
+    while($user = $result1->fetch_assoc()){
+        if ($id == $user["nama_lahan"]){
+            if ($user["proses"] != NULL){
+                echo "
+                <script>
+                    alert('lahan sedang dalam proses budidaya')
+                    document.location.href = 'lahan.php';
+                </script>
+                ";
+                exit;
+            }
         }
     }
     $query = "UPDATE lahan SET 
-    nama_lahan = '$nama',
-    lokasi = '$lokasi', 
-    kapasitas = $kapasitas,
-    luas = $luas,
-    tanaman = '$tanaman'
+    tanaman = '$tanaman',
+    proses = '$proses',
+    penyemaian = '$penyemaian'
     WHERE nama_lahan = '$id'
     ";
 mysqli_query($conn,$query);
 return mysqli_affected_rows($conn);
 }
-function hapuslahan($id){
+function hapusaktivitas($data){
     global $conn;
-    mysqli_query($conn, "DELETE FROM lahan WHERE nama_lahan = '$id'");
+    $id = $data;
+    $query = "UPDATE lahan SET 
+    tanaman = NULL,
+    proses = NULL,
+    penyemaian = NULL,
+    pertumbuhan = NULL,
+    panen = NULL,
+    keterangan = NULL
+    WHERE nama_lahan = '$id'
+    ";
+mysqli_query($conn,$query);
+return mysqli_affected_rows($conn);
+}
+function ubahaktivitas($data){
+    global $conn;
+    $id = $data["id"];
+    $nama = htmlspecialchars($data["nama"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    $query = "UPDATE lahan SET 
+    tanaman = '$nama',
+    keterangan = '$keterangan'
+    WHERE nama_lahan = '$id'
+    ";
+mysqli_query($conn,$query);
+return mysqli_affected_rows($conn);
+}
+function pertumbuhan($data){
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $id = $data["id"];
+    $proses = 'pertumbuhan';
+    $pertumbuhan = date("Y-m-d H:i:s");
+    $query = "UPDATE lahan SET 
+    proses = '$proses',
+    pertumbuhan = '$pertumbuhan'
+    WHERE nama_lahan = '$id'
+    ";
+mysqli_query($conn,$query);
+return mysqli_affected_rows($conn);
+}
+function panen($data){
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $id = $data["id"];
+    $proses = 'panen';
+    $panen = date("Y-m-d H:i:s");
+    $query = "UPDATE lahan SET 
+    proses = '$proses',
+    panen = '$panen'
+    WHERE nama_lahan = '$id'
+    ";
+mysqli_query($conn,$query);
+return mysqli_affected_rows($conn);
+}
+function inputriwayat($data) {
+    global $conn;
+    $nama_lahan = htmlspecialchars($data["lahan"]);
+    $tanaman = htmlspecialchars($data["nama"]);
+    $penyemaian = htmlspecialchars($data["penyemaian"]);
+    $pertumbuhan = htmlspecialchars($data["pertumbuhan"]);
+    $panen = htmlspecialchars($data["panen"]);
+    $hasil = htmlspecialchars($data["hasil"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    mysqli_query($conn, "INSERT INTO riwayat VALUES ('','$nama_lahan','$tanaman','$penyemaian','$pertumbuhan','$panen','$hasil','$keterangan')");
+    hapusaktivitas($nama_lahan);
+    return mysqli_affected_rows($conn);
+}
+function hapusriwayat($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM riwayat WHERE nama_lahan = '$id'");
+    return mysqli_affected_rows($conn);
+}  
+function ubahriwayat($data){
+    global $conn;
+    $id = $data["id"];
+    $lahan = htmlspecialchars($data["lahan"]);
+    $tanaman = htmlspecialchars($data["nama"]);
+    $hasil = htmlspecialchars($data["hasil"]);
+    $keterangan = htmlspecialchars($data["lokasi"]);
+    $query = "UPDATE riwayat SET 
+    nama_lahan = '$lahan',
+    tanaman = '$nama',
+    hasil = '$hasil',
+    keterangan = '$keterangan'
+    WHERE nama_lahan = '$id'
+    ";
+mysqli_query($conn,$query);
+return mysqli_affected_rows($conn);
+}
+function pesan($data) {
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $pelaku = htmlspecialchars($data["aktor"]);
+    $tanggal = date("Y-m-d H:i:s");
+    $proses = htmlspecialchars($data["proses"]);
+    $pesan = htmlspecialchars($data["pesan"]);
+    $nama = htmlspecialchars($data["nama"]);
+    mysqli_query($conn, "INSERT INTO chat VALUES ('','$pelaku','$pesan','$tanggal','$proses','$nama')");
+    hapusaktivitas($nama_lahan);
+    return mysqli_affected_rows($conn);
+}
+function hapuspesan($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM chat WHERE pesan = '$id'");
     return mysqli_affected_rows($conn);
 }  
 ?>

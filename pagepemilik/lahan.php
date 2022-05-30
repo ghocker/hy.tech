@@ -5,7 +5,25 @@ if (!isset($_SESSION["login"])){
     exit;
 }
 require '../function.php';
-$data_lahan = query('SELECT * FROM lahan');
+if (isset($_POST["submit"]) ){
+    if (tanaman($_POST) > 0){
+        echo "
+            <script>
+                alert('data tanaman ditambah')
+                document.location.href = 'aktivitas.php';
+            </script>
+            ";
+    }else{
+         echo "
+            <script>
+                alert('data tanaman gagal ditambah')
+                document.location.href = 'lahan.php';
+            </script>
+            ";
+        }
+    
+}
+$data_lahan = query('SELECT * FROM lahan GROUP BY nama_lahan ASC');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +61,9 @@ $data_lahan = query('SELECT * FROM lahan');
                         <a class="nav-link active" aria-current="page" href="lahan.php">Lahan</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="aktivitas.php">Aktivitas</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="akun.php">Akun</a>
                     </li>
                 </ul>
@@ -66,9 +87,17 @@ $data_lahan = query('SELECT * FROM lahan');
                     </div>
                     <div class="card-body bg-light">
                         <h5 class="card-title">Tanaman <?=$row["tanaman"]?></h5>
-                        <p class="card-text p-0 m-0">kapasitas : <?=$row["kapasitas"]?> lubang</p>
-                        <p class="card-text p-0 m-0">Luas : <?=$row["luas"]?> m2</p>
-                        <p class="card-text p-0 m-0">Lokasi : <?=$row["lokasi"]?></p>
+                        <p class="card-text p-0 m-0">kapasitas <span
+                                style="display:inline-block; width: 30px;;"></span>: &nbsp;&nbsp;<?=$row["kapasitas"]?>
+                            lubang
+                        </p>
+                        <p class="card-text p-0 m-0">Luas <span
+                                style="display:inline-block; width: 63px;"></span>:&nbsp;&nbsp;
+                            <?=$row["luas"]?> m2</p>
+                        <p class="card-text p-0 m-0">Lokasi <span
+                                style="display:inline-block; width: 51px;"></span>:&nbsp;&nbsp;
+                            <?=$row["lokasi"]?>
+                        </p>
                     </div>
                 </div>
             </div>

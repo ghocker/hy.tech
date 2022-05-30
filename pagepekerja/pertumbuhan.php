@@ -6,11 +6,11 @@ if (!isset($_SESSION["login"])){
 }
 require '../function.php';
 if (isset($_POST["submit"]) ){
-    if (pertumbuhan($_POST) > 0){
+    if (panen($_POST) > 0){
         echo "
             <script>
                 alert('data tanaman berhasil dipindah')
-                document.location.href = 'pertumbuhan.php';
+                document.location.href = 'panen.php';
             </script>
             ";
     }else{
@@ -26,10 +26,11 @@ if (isset($_POST["submit"]) ){
 if (isset($_POST["kirim"])) {
     pesan($_POST);
 }
-$chat = query('SELECT * FROM chat WHERE proses = "penyemaian" GROUP BY id ASC');
-$tanggal_chat = query('SELECT DAY(tanggal), MONTH(tanggal), YEAR(tanggal), HOUR(tanggal), MINUTE(tanggal) FROM chat WHERE proses = "penyemaian" GROUP BY id ASC');
-$data_lahan = query('SELECT * FROM lahan WHERE proses = "penyemaian" GROUP BY nama_lahan ASC');
-$tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(penyemaian), HOUR(penyemaian), MINUTE(penyemaian) FROM lahan WHERE proses = "penyemaian" GROUP BY nama_lahan ASC');
+$chat = query('SELECT * FROM chat WHERE proses = "pertumbuhan" GROUP BY id ASC');
+$tanggal_chat = query('SELECT DAY(tanggal), MONTH(tanggal), YEAR(tanggal), HOUR(tanggal), MINUTE(tanggal) FROM chat WHERE proses = "pertumbuhan" GROUP BY id ASC');
+$data_lahan = query('SELECT * FROM lahan WHERE proses = "pertumbuhan" GROUP BY nama_lahan ASC');
+$tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(penyemaian), HOUR(penyemaian), MINUTE(penyemaian) FROM lahan WHERE proses = "pertumbuhan" GROUP BY nama_lahan ASC');
+$tanggal_pertumbuhan = query('SELECT DAY(pertumbuhan), MONTH(pertumbuhan), YEAR(pertumbuhan), HOUR(pertumbuhan), MINUTE(pertumbuhan) FROM lahan WHERE proses = "pertumbuhan" GROUP BY nama_lahan ASC');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,13 +95,13 @@ $tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(pen
                     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item me-5">
-                                <a class="nav-link active" aria-current="page" href="aktivitas.php">Penyemaian</a>
+                                <a class="nav-link" href="aktivitas.php">Penyemaian</a>
+                            </li>
+                            <li class="nav-item me-5">
+                                <a class="nav-link active" aria-current="page" href="pertumbuhan.php">Pertumbuhan</a>
                                 <div class="form-border"
                                     style="background: -webkit-linear-gradient(right, #a6f77b, #2ec06f); height: 2px; width: 100%;">
                                 </div>
-                            </li>
-                            <li class="nav-item me-5">
-                                <a class="nav-link" href="pertumbuhan.php">Pertumbuhan</a>
                             </li>
                             <li class="nav-item me-5">
                                 <a class="nav-link" href="panen.php">Panen</a>
@@ -123,7 +124,7 @@ $tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(pen
             <?php endif;?>
             <?php $i=0;?>
             <?php foreach ($data_lahan as $row) :?>
-            <div class="row mb-4">
+            <div class="row mb-3">
                 <div class="card p-0">
                     <div class="card-header bg-success" style="color:white;">
                         <?=$row["nama_lahan"]?>
@@ -134,15 +135,19 @@ $tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(pen
                                 style="display:inline-block; width: 40px;;"></span>:
                             &nbsp;&nbsp;<?=$tanggal_penyemaian[$i]["DAY(penyemaian)"], '/' ,$tanggal_penyemaian[$i]["MONTH(penyemaian)"], '/' ,$tanggal_penyemaian[$i]["YEAR(penyemaian)"],'   ' ,$tanggal_penyemaian[$i]["HOUR(penyemaian)"],':' ,$tanggal_penyemaian[$i]["MINUTE(penyemaian)"],' WIB'?>
                         </p>
+                        <p class="card-text p-0 m-0">Waktu Pertumbuhan <span
+                                style="display:inline-block; width: 30px;"></span>:&nbsp;&nbsp;
+                            <?=$tanggal_pertumbuhan[$i]["DAY(pertumbuhan)"], '/' ,$tanggal_pertumbuhan[$i]["MONTH(pertumbuhan)"], '/' ,$tanggal_pertumbuhan[$i]["YEAR(pertumbuhan)"],'   ' ,$tanggal_pertumbuhan[$i]["HOUR(pertumbuhan)"],':' ,$tanggal_pertumbuhan[$i]["MINUTE(pertumbuhan)"],' WIB'?>
+                        </p>
                         <p class="card-text p-0 m-0">keterangan <span
                                 style="display:inline-block; width: 95px;;"></span>: &nbsp;&nbsp;<?=$row["keterangan"]?>
                         </p>
                         <div class="text-end">
                             <form action="" method="post">
                                 <input type="hidden" name="id" value="<?=$row["nama_lahan"];?>">
-                                <a href="hapusaktivitas.php?nama=<?= $row["nama_lahan"];?>"
+                                <a href="hapuspertumbuhan.php?nama=<?= $row["nama_lahan"];?>"
                                     class="btn btn-danger">Hapus</a>
-                                <a href="ubahaktivitas.php?nama=<?= $row["nama_lahan"];?>"
+                                <a href="ubahpertumbuhan.php?nama=<?= $row["nama_lahan"];?>"
                                     class="btn btn-warning">Ubah</a>
                                 <a href=""><button type="submit" class="btn btn-success"
                                         name="submit">selesai</button></a>
@@ -155,7 +160,7 @@ $tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(pen
             <?php endforeach;?>
             <div class="row mt-5">
                 <div class="bg-success text-center" style="color:white;">
-                    <h5 class="p-2">Komentar Penyemaian</h5>
+                    <h5 class="p-2">Komentar Pertumbuhan</h5>
                 </div>
                 <div class="card bg-light">
                     <?php if (empty($chat)) :?>
@@ -181,8 +186,8 @@ $tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(pen
                     <?php if ($r["pelaku"] == 'pekerja'):?>
                     <div class="row justify-content-end">
                         <div class="col-md-5 m-3 text-end" style="padding-top:31px;">
-                            <a href="hapuspesan.php?nama=<?= $r["pesan"]?>"><i style="color:red; margin-right:-43px;"
-                                    class="bi bi-trash3 pt-1 fs-5"></i></a>
+                            <a href="hapuspesanpertumbuhan.php?nama=<?= $r["pesan"]?>"><i
+                                    style="color:red; margin-right:-43px;" class="bi bi-trash3 pt-1 fs-5"></i></a>
                         </div>
                         <div class="col-md-5 m-3">
                             <h6 style="margin-right:-10px;" class="text-end"><?= $r["pelaku"]?></h6>
@@ -201,7 +206,7 @@ $tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(pen
                     <form action="" method="post" class="mb-3 mt-2">
                         <input type="hidden" value="<?= $_SESSION["login"]?>" name="nama">
                         <input type="hidden" value="pekerja" name="aktor">
-                        <input type="hidden" value="penyemaian" name="proses">
+                        <input type="hidden" value="pertumbuhan" name="proses">
                         <input type="text" placeholder="  Ketik pesan" name="pesan" style="width:1220px; height:37px;"
                             required>
                         <button type="submit" name="kirim" class="btn btn-success ms-2"

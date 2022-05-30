@@ -154,8 +154,8 @@ function salam($sal){
     <!-- awal badan -->
     <section>
         <div class="row">
-            <div class="class text-center">
-                <h3>Tujuan HY.TECH</h3>
+            <div class="class text-center mb-3">
+                <h3>TUJUAN HY.TECH</h3>
             </div>
             <div class="row text-center">
                 <ul>
@@ -173,6 +173,85 @@ function salam($sal){
                         Memperkenalkan mitra di bidang teknologi hidroponik yang lebih luas.
                     </li>
                 </ul>
+            </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#caf1d2" fill-opacity="1"
+                d="M0,192L80,213.3C160,235,320,277,480,277.3C640,277,800,235,960,218.7C1120,203,1280,213,1360,218.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+            </path>
+        </svg>
+    </section>
+    <section style="background-color: #caf1d2;">
+        <div class="container">
+            <div class="row">
+                <div class="class text-center mt-5 mb-3">
+                    <h3>MITRA HY.TECH</h3>
+                </div>
+            </div>
+            <div class="row text-center justify-content-center">
+                <img src="img/farm.png" alt="logo" style="width: 260px; height: 260px;"
+                    class="rounded-circle img-thumbnail border border-dark border-4" />
+            </div>
+            <div class="row text-center">
+                <h5 class="mt-3">Bondowoso Sinergi Farming</h5>
+                <p>Jl. Raya Jember Dadapan Grujugan Bondowoso Jawa Timur (Depan Toko Basmalah Grujugan)</p>
+                <p>087791156327</p>
+            </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fill-opacity="1"
+                d="M0,192L60,170.7C120,149,240,107,360,106.7C480,107,600,149,720,160C840,171,960,149,1080,117.3C1200,85,1320,43,1380,21.3L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
+            </path>
+        </svg>
+    </section>
+    <section>
+        <div class="container mb-4">
+            <div class="row">
+                <div class="class text-center mb-3">
+                    <h3>TIM HY.TECH</h3>
+                </div>
+            </div>
+            <div class="row mt-5 text-center">
+                <div class="col-md-2 me-5">
+                    <img src="img/hafidz.jpeg" alt="logo" style="width: 260px; height: 260px;"
+                        class="rounded-circle img-thumbnail border border-success border-4" />
+                    <h5 class="mt-3">Hafidzun Alim</h5>
+                    <p class="mb-0">Project Manager</p>
+                    <p class="m-0">202410103062</p>
+                    <p class="m-0">Informatika 20</p>
+                </div>
+                <div class="col-md-2 me-5">
+                    <img src="img/nur.jpeg" alt="logo" style="width: 260px; height: 260px;"
+                        class="rounded-circle img-thumbnail border border-success border-4" />
+                    <h5 class="mt-3">Nur Azlina</h5>
+                    <p class="mb-0">System Analyst</p>
+                    <p class="m-0">202410103002</p>
+                    <p class="m-0">Informatika 20</p>
+                </div>
+                <div class="col-md-2 me-5">
+                    <img src="img/cindi.jpg" alt="logo" style="width: 260px; height: 260px;"
+                        class="rounded-circle img-thumbnail border border-success border-4" />
+                    <h5 class="mt-3">Cindi Dewi Aprilia</h5>
+                    <p class="mb-0">System Designer</p>
+                    <p class="m-0">202410103075</p>
+                    <p class="m-0">Informatika 20</p>
+                </div>
+                <div class="col-md-2 me-5">
+                    <img src="img/my.jpg" alt="logo" style="width: 260px; height: 260px;"
+                        class="rounded-circle img-thumbnail border border-success border-4" />
+                    <h5 class="mt-3">Ghufron Ghozi R</h5>
+                    <p class="mb-0">System Developer</p>
+                    <p class="m-0">202410103087</p>
+                    <p class="m-0">Informatika 20</p>
+                </div>
+                <div class="col-md-2">
+                    <img src="img/ikang.jpeg" alt="logo" style="width: 260px; height: 260px;"
+                        class="rounded-circle img-thumbnail border border-success border-4" />
+                    <h5 class="mt-3">Ikang Tanoto</h5>
+                    <p class="mb-0">System Tester</p>
+                    <p class="m-0">202410103018</p>
+                    <p class="m-0">Informatika 20</p>
+                </div>
             </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

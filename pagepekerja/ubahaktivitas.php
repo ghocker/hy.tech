@@ -1,29 +1,30 @@
 <?php
 session_start();
 if (!isset($_SESSION["login"])){
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit;
 }
 require '../function.php';
+$id= $_GET["nama"];
+$lahan = query("SELECT * FROM lahan WHERE nama_lahan = '$id'")[0];
 if (isset($_POST["submit"]) ){
-    if (tanaman($_POST) > 0){
+    if (ubahaktivitas($_POST) > 0){
         echo "
             <script>
-                alert('data tanaman ditambah')
+                alert('data berhasil diubah')
                 document.location.href = 'aktivitas.php';
             </script>
             ";
     }else{
          echo "
             <script>
-                alert('data tanaman gagal ditambah')
-                document.location.href = 'lahan.php';
+                alert('data gagal diubah')
+                document.location.href = 'aktivitas.php';
             </script>
             ";
         }
     
 }
-$data_lahan = query('SELECT * FROM lahan GROUP BY nama_lahan ASC');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,52 +73,30 @@ $data_lahan = query('SELECT * FROM lahan GROUP BY nama_lahan ASC');
     </nav>
     <!-- akhir navbar -->
     <!-- awal jumbotron -->
-    <section class="text-center mb-5" style="padding-top:5rem;">
-        <h3 class="pt-2">DAFTAR LAHAN</h3>
+    <section class="text-center" style="padding-top:5rem;">
+        <h3 class="pt-2">Ubah Data Aktivitas</h3>
     </section>
     <!-- akhir jumbotron -->
     <!-- awal badan -->
     <section>
-        <div class="container">
-            <?php foreach ($data_lahan as $row) :?>
-            <div class="row mb-3">
-                <div class="card p-0">
-                    <div class="card-header bg-success" style="color:white;">
-                        <?=$row["nama_lahan"]?>
-                    </div>
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Tanaman <?=$row["tanaman"]?></h5>
-                        <p class="card-text p-0 m-0">kapasitas <span
-                                style="display:inline-block; width: 30px;;"></span>: &nbsp;&nbsp;<?=$row["kapasitas"]?>
-                            lubang
-                        </p>
-                        <p class="card-text p-0 m-0">Luas <span
-                                style="display:inline-block; width: 63px;"></span>:&nbsp;&nbsp;
-                            <?=$row["luas"]?> m2</p>
-                        <p class="card-text p-0 m-0">Lokasi <span
-                                style="display:inline-block; width: 51px;"></span>:&nbsp;&nbsp;
-                            <?=$row["lokasi"]?>
-                        </p>
-                        <div class="mt-3">
-                            <form action="" method="post">
-                                <input type="hidden" name="id" value="<?=$row["nama_lahan"];?>">
-                                <input style="width: 1040px; height: 40px;" class="me-3" type="text"
-                                    placeholder="&nbsp;&nbsp;Masukkan nama tanaman" name="tanaman" required>
-                                <a href=""><button type="submit" name="submit"
-                                        class="btn btn-success ms-2">Tanam</button></a>
-                                <a href="hapuslahan.php?nama=<?= $row["nama_lahan"];?>" class="btn btn-danger">Hapus</a>
-                                <a href="ubahlahan.php?nama=<?= $row["nama_lahan"];?>" class="btn btn-warning">Ubah</a>
-                            </form>
-                        </div>
-                    </div>
+        <div class="container text-center pt-5" style="width:350px;">
+            <form action="" method="post">
+                <input type="hidden" name="id" value="<?=$id;?>">
+                <div class="row mb-3">
+                    <label for="nama">Masukkan Nama Tanaman :</label>
+                    <input type="text" class="text-center" name="nama" id="nama" required
+                        value="<?=$lahan["tanaman"]?>">
                 </div>
-            </div>
-            <?php endforeach;?>
-            <div class="row justify-content-center">
-                <div class="class pt-5 text-center">
-                    <a href="tambahlahan.php" class="btn btn-success">Tambah Data Lahan</a>
+                <div class="row mb-3">
+                    <label for="lokasi">Masukkan Keterangan :</label>
+                    <input type="text" class="text-center" name="keterangan" id="lokasi" required
+                        value="<?=$lahan["keterangan"]?>">
                 </div>
-            </div>
+                <div class="row mb-3" style="display:inline;">
+                    <a href="aktivitas.php"><button type="button" class="btn btn-danger">BATAL</button></a>
+                    <a href=""><button type="submit" class="btn btn-success" name="submit">UBAH</button></a>
+                </div>
+            </form>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#198754" fill-opacity="1"
@@ -129,8 +108,7 @@ $data_lahan = query('SELECT * FROM lahan GROUP BY nama_lahan ASC');
     <!-- awal footer -->
     <footer class="bg-success text-white text-center pb-3">
         <p>Created with pleasure by <a href="https://www.instagram.com/ghozi_ramadhan/"
-                class="text-white fw-bold">Ghufron
-                Ghozi Ramadhan</a></p>
+                class="text-white fw-bold">Ghufron Ghozi Ramadhan</a></p>
     </footer>
     <!-- akhir footer -->
 </body>
