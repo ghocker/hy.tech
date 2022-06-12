@@ -64,6 +64,8 @@ $data_lahan = query('SELECT * FROM lahan GROUP BY nama_lahan ASC');
                         <a class="nav-link" href="aktivitas.php">Aktivitas</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="keuangan.php">Keuangan</a>
+                    <li class="nav-item">
                         <a class="nav-link" href="akun.php">Akun</a>
                     </li>
                 </ul>

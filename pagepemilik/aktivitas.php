@@ -52,6 +52,8 @@ $tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(pen
                         <a class="nav-link active" aria-current="page" href="aktivitas.php">Aktivitas</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="keuangan.php">Keuangan</a>
+                    <li class="nav-item">
                         <a class="nav-link" href="akun.php">Akun</a>
                     </li>
                 </ul>

@@ -127,6 +127,8 @@ function salam($sal){
                     <li class="nav-item">
                         <a class="nav-link" href="pagepemilik/aktivitas.php">Aktivitas</a>
                     <li class="nav-item">
+                        <a class="nav-link" href="pagepemilik/keuangan.php">Keuangan</a>
+                    <li class="nav-item">
                         <a class="nav-link" href="pagepemilik/akun.php?nama=<?=$_SESSION["login"];?>">Akun</a>
                     </li>
                 </ul>

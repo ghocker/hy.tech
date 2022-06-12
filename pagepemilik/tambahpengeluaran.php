@@ -5,21 +5,19 @@ if (!isset($_SESSION["login"])){
     exit;
 }
 require '../function.php';
-$id= $_GET["nama"];
-$akun = query("SELECT * FROM akunpekerja WHERE username = '$id'")[0];
 if (isset($_POST["submit"]) ){
-    if (ubahpekerja($_POST) > 0){
+    if (tambahpengeluaran($_POST) > 0){
         echo "
             <script>
-                alert('data berhasil diubah')
-                document.location.href = 'akun.php';
+                alert('data berhasil ditambah')
+                document.location.href = 'pengeluaran.php';
             </script>
             ";
     }else{
          echo "
             <script>
-                alert('data gagal diubah')
-                document.location.href = 'akun.php';
+                alert('data gagal ditambah')
+                document.location.href = 'pengeluaran.php';
             </script>
             ";
         }
@@ -65,9 +63,9 @@ if (isset($_POST["submit"]) ){
                         <a class="nav-link" href="aktivitas.php">Aktivitas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="keuangan.php">Keuangan</a>
+                        <a class="nav-link active" aria-current="page" href="keuangan.php">Keuangan</a>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="akun.php">Akun</a>
+                        <a class="nav-link" href="akun.php">Akun</a>
                     </li>
                 </ul>
             </div>
@@ -75,46 +73,65 @@ if (isset($_POST["submit"]) ){
     </nav>
     <!-- akhir navbar -->
     <!-- awal jumbotron -->
-    <section class="text-center" style="padding-top:5rem;">
-        <img src="../img/hy.tech.jpg" alt="logo" width="200"
-            class="rounded-circle img-thumbnail border border-success border-4" />
-        <h3 class="pt-2">Ubah Akun Pekerja</h3>
+    <section class="text-center mb-5" style="padding-top:5rem;">
+        <h3 class="pt-2">KEUANGAN</h3>
     </section>
     <!-- akhir jumbotron -->
     <!-- awal badan -->
     <section>
+        <div class="container justifiy-content-center text-center">
+            <nav class="navbar navbar-expand-lg navbar-light justify-content-center text-center">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item me-5">
+                                <a class="nav-link" href="keuangan.php">Mitra</a>
+
+                            </li>
+                            <li class="nav-item me-5">
+                                <a class="nav-link" href="pemasukan.php">Pemasukan</a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="pengeluaran.php">Pengeluaran</a>
+                                <div class="form-border"
+                                    style="background: -webkit-linear-gradient(right, #a6f77b, #2ec06f); height: 2px; width: 100%;">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <!-- akhir navbar -->
+    <!-- awal badan -->
+    <section>
         <div class="container text-center pt-5" style="width:350px;">
             <form action="" method="post">
-                <input type="hidden" name="id" value="<?=$id;?>">
                 <div class="row mb-3">
-                    <label for="nama">Masukkan Nama baru</label>
-                    <input type="text" class="text-center" name="nama" id="nama" value="<?=$akun["nama_pekerja"];?>">
+                    <label for="asal">Masukkan Asal Barang Transaksi :</label>
+                    <input type="text" class="text-center" name="asal" id="asal" required>
                 </div>
                 <div class="row mb-3">
-                    <label for="email">Masukkan Email baru</label>
-                    <input type="email" class="text-center" name="email" id="email"
-                        value="<?=$akun["email_pekerja"];?>">
+                    <label for="barang">Masukkan Barang Transaksi (pcs) :</label>
+                    <input type="text" class="text-center" name="barang" id="barang" required>
                 </div>
                 <div class="row mb-3">
-                    <label for="user">Masukkan user baru</label>
-                    <input type="text" class="text-center" name="user" id="user" value="<?=$akun["username"];?>">
+                    <label for="nominal">Masukkan Jumlah Transaksi (Rp) :</label>
+                    <input type="text" class="text-center" name="nominal" id="nominal" required>
                 </div>
                 <div class="row mb-3">
-                    <label for="pass">Masukkan password baru</label>
-                    <input type="password" class="text-center" name="pass" id="pass">
-                </div>
-                <div class="row mb-4">
-                    <label for="pass2">Ulangi password baru</label>
-                    <input type="password" class="text-center" name="pass2" id="pass2">
-                </div>
-                <div class="row mb-3">
-                    <label for="alamat">Masukkan Alamat baru</label>
-                    <input type="text" class="text-center" name="alamat" id="alamat"
-                        value="<?=$akun["alamat_pekerja"];?>">
+                    <label for="keterangan">Masukkan Keterangan :</label>
+                    <input type="text" class="text-center" name="keterangan" id="keterangan">
                 </div>
                 <div class="row mb-3" style="display:inline;">
-                    <a href="akun.php"><button type="button" class="btn btn-danger">BATAL</button></a>
-                    <a href=""><button type="submit" class="btn btn-success" name="submit">UBAH</button></a>
+                    <a href="pengeluaran.php"><button type="button" class="btn btn-danger">BATAL</button></a>
+                    <a href=""><button type="submit" class="btn btn-success" name="submit">Tambah</button></a>
                 </div>
             </form>
         </div>

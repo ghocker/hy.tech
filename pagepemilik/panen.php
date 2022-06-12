@@ -55,6 +55,8 @@ var_dump($data_lahan);
                         <a class="nav-link active" aria-current="page" href="aktivitas.php">Aktivitas</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="keuangan.php">Keuangan</a>
+                    <li class="nav-item">
                         <a class="nav-link" href="akun.php">Akun</a>
                     </li>
                 </ul>
@@ -63,8 +65,8 @@ var_dump($data_lahan);
     </nav>
     <!-- akhir navbar -->
     <!-- awal jumbotron -->
-    <section class="text-center mb-5" style="padding-top:5rem;">
-        <h3 class="pt-2">AKTIVITAS LAHAN</h3>
+    <section class="text-center mb-5" style="padding-top:4rem;">
+        <h3 class="">AKTIVITAS LAHAN</h3>
     </section>
     <!-- akhir jumbotron -->
     <!-- awal badan -->

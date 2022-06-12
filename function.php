@@ -320,4 +320,164 @@ function hapuspesan($id){
     mysqli_query($conn, "DELETE FROM chat WHERE pesan = '$id'");
     return mysqli_affected_rows($conn);
 }  
+function tambahmitra($data) {
+    global $conn;
+    $mitra = htmlspecialchars($data["mitra"]);
+    $pemilik = htmlspecialchars($data["pemilik"]);
+    $contact = htmlspecialchars($data["contact"]);
+    $alamat = htmlspecialchars($data["alamat"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    $sql1 = "SELECT * FROM mitra";
+    $result1 = $conn->query($sql1);
+    while($user = $result1->fetch_assoc()){
+        if ($mitra == $user["nama_mitra"]){
+            echo "
+                <script>
+                    alert('nama Mitra sudah ada')
+                    document.location.href = 'keuangan.php';
+                </script>
+                ";
+                exit;
+        }
+    }
+    mysqli_query($conn, "INSERT INTO mitra VALUES ('','$mitra','$pemilik','$contact','$alamat','$keterangan')");
+    return mysqli_affected_rows($conn);
+} 
+function ubahmitra($data){
+    global $conn;
+    $id = $data["id"];
+    $mitra = htmlspecialchars($data["mitra"]);
+    $pemilik = htmlspecialchars($data["pemilik"]);
+    $contact = htmlspecialchars($data["contact"]);
+    $alamat = htmlspecialchars($data["alamat"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    $sql1 = "SELECT * FROM mitra";
+    $result1 = $conn->query($sql1);
+    while($user = $result1->fetch_assoc()){
+        if ($mitra == $user["nama_mitra"]){
+            echo "
+                <script>
+                    alert('nama mitra sudah ada')
+                    document.location.href = 'keuangan.php';
+                </script>
+                ";
+                exit;
+        }
+        else{
+            $query = "UPDATE mitra SET 
+    nama_mitra = '$mitra',
+    nama_pemilik = '$pemilik', 
+    contact = '$contact',
+    alamat = '$alamat',
+    keterangan = '$keterangan'
+    WHERE nama_mitra = '$id'
+    ";
+    mysqli_query($conn,$query);
+    return mysqli_affected_rows($conn);
+            
+        }
+    }
+}
+function hapusmitra($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM mitra WHERE nama_mitra = '$id'");
+    return mysqli_affected_rows($conn);
+}  
+function tambahtransaksi($data) {
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $tanggal = date("Y-m-d H:i:s");
+    $asal = htmlspecialchars($data["asal"]);
+    $barang = htmlspecialchars($data["barang"]);
+    $nominal = htmlspecialchars($data["nominal"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    mysqli_query($conn, "INSERT INTO keuangan VALUES ('','$tanggal','$barang','$nominal','$keterangan','$asal','pemasukan')");
+    return mysqli_affected_rows($conn);
+} 
+function hapustransaksi($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM keuangan WHERE id = '$id'");
+    return mysqli_affected_rows($conn);
+}  
+function ubahtransaksimitra($data){
+    global $conn;
+    $id = $data["id"];
+    $barang = htmlspecialchars($data["barang"]);
+    $nominal = htmlspecialchars($data["nominal"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    $query = "UPDATE keuangan SET 
+    barang = '$barang',
+    nominal = '$nominal', 
+    keterangan = '$keterangan'
+    WHERE id = '$id'
+    ";
+    mysqli_query($conn,$query);
+    return mysqli_affected_rows($conn);
+}
+function tambahpemasukan($data) {
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $tanggal = date("Y-m-d H:i:s");
+    $asal = htmlspecialchars($data["asal"]);
+    $barang = htmlspecialchars($data["barang"]);
+    $nominal = htmlspecialchars($data["nominal"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    mysqli_query($conn, "INSERT INTO keuangan VALUES ('','$tanggal','$barang','$nominal','$keterangan','$asal','pemasukan')");
+    return mysqli_affected_rows($conn);
+} 
+function tambahpengeluaran($data) {
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $tanggal = date("Y-m-d H:i:s");
+    $asal = htmlspecialchars($data["asal"]);
+    $barang = htmlspecialchars($data["barang"]);
+    $nominal = htmlspecialchars($data["nominal"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    mysqli_query($conn, "INSERT INTO keuangan VALUES ('','$tanggal','$barang','$nominal','$keterangan','$asal','pengeluaran')");
+    return mysqli_affected_rows($conn);
+} 
+function ubahpemasukan($data){
+    global $conn;
+    $id = $data["id"];
+    $barang = htmlspecialchars($data["barang"]);
+    $nominal = htmlspecialchars($data["nominal"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    $asal = htmlspecialchars($data["asal"]);
+    $query = "UPDATE keuangan SET 
+    asal = '$asal',
+    barang = '$barang',
+    nominal = '$nominal', 
+    keterangan = '$keterangan'
+    WHERE id = '$id'
+    ";
+    mysqli_query($conn,$query);
+    return mysqli_affected_rows($conn);
+}
+function hapuspemasukan($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM keuangan WHERE id = '$id'");
+    return mysqli_affected_rows($conn);
+}  
+function ubahpengeluaran($data){
+    global $conn;
+    $id = $data["id"];
+    $barang = htmlspecialchars($data["barang"]);
+    $nominal = htmlspecialchars($data["nominal"]);
+    $keterangan = htmlspecialchars($data["keterangan"]);
+    $asal = htmlspecialchars($data["asal"]);
+    $query = "UPDATE keuangan SET 
+    asal = '$asal',
+    barang = '$barang',
+    nominal = '$nominal', 
+    keterangan = '$keterangan'
+    WHERE id = '$id'
+    ";
+    mysqli_query($conn,$query);
+    return mysqli_affected_rows($conn);
+}
+function hapuspengeluaran($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM keuangan WHERE id = '$id'");
+    return mysqli_affected_rows($conn);
+}  
 ?>

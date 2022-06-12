@@ -5,12 +5,8 @@ if (!isset($_SESSION["login"])){
     exit;
 }
 require '../function.php';
-$data_lahan = query('SELECT * FROM riwayat');
-$tanggal_penyemaian = query('SELECT DAY(penyemaian), MONTH(penyemaian), YEAR(penyemaian), HOUR(penyemaian), MINUTE(penyemaian) FROM riwayat');
-$tanggal_pertumbuhan = query('SELECT DAY(pertumbuhan), MONTH(pertumbuhan), YEAR(pertumbuhan), HOUR(pertumbuhan), MINUTE(pertumbuhan) FROM riwayat');
-$tanggal_panen = query('SELECT DAY(panen), MONTH(panen), YEAR(panen), HOUR(panen), MINUTE(panen) FROM riwayat');
-$penyemaian = query('SELECT datediff(pertumbuhan, penyemaian) AS selisih FROM riwayat');
-$pertumbuhan = query('SELECT datediff(panen, pertumbuhan) AS selisih FROM riwayat');
+$data_keuangan = query("SELECT * FROM keuangan WHERE tipe = 'pengeluaran'");
+$tanggal = query("SELECT DAY(tanggal), MONTH(tanggal), YEAR(tanggal), HOUR(tanggal), MINUTE(tanggal) FROM keuangan WHERE tipe = 'pengeluaran'");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,10 +44,10 @@ $pertumbuhan = query('SELECT datediff(panen, pertumbuhan) AS selisih FROM riwaya
                         <a class="nav-link" href="lahan.php">Lahan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="aktivitas.php">Aktivitas</a>
+                        <a class="nav-link" href="aktivitas.php">Aktivitas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="keuangan.php">Keuangan</a>
+                        <a class="nav-link active" aria-current="page" href="keuangan.php">Keuangan</a>
                     <li class="nav-item">
                         <a class="nav-link" href="akun.php">Akun</a>
                     </li>
@@ -62,7 +58,7 @@ $pertumbuhan = query('SELECT datediff(panen, pertumbuhan) AS selisih FROM riwaya
     <!-- akhir navbar -->
     <!-- awal jumbotron -->
     <section class="text-center mb-5" style="padding-top:5rem;">
-        <h3 class="pt-2">AKTIVITAS LAHAN</h3>
+        <h3 class="pt-2">KEUANGAN</h3>
     </section>
     <!-- akhir jumbotron -->
     <!-- awal badan -->
@@ -77,16 +73,13 @@ $pertumbuhan = query('SELECT datediff(panen, pertumbuhan) AS selisih FROM riwaya
                     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item me-5">
-                                <a class="nav-link" href="aktivitas.php">Penyemaian</a>
+                                <a class="nav-link" href="keuangan.php">Mitra</a>
                             </li>
                             <li class="nav-item me-5">
-                                <a class="nav-link" href="pertumbuhan.php">Pertumbuhan</a>
+                                <a class="nav-link" href="pemasukan.php">Pemasukan</a>
                             </li>
-                            <li class="nav-item me-5">
-                                <a class="nav-link" href="panen.php">Panen</a>
-                            </li>
-                            <li class="nav-item me-5">
-                                <a class="nav-link active" aria-current="page" href="riwayat.php">Riwayat</a>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="pengeluaran.php">Pengeluaran</a>
                                 <div class="form-border"
                                     style="background: -webkit-linear-gradient(right, #a6f77b, #2ec06f); height: 2px; width: 100%;">
                                 </div>
@@ -97,58 +90,45 @@ $pertumbuhan = query('SELECT datediff(panen, pertumbuhan) AS selisih FROM riwaya
             </nav>
         </div>
     </section>
-    <!-- akhir jumbotron -->
-    <!-- awal badan -->
     <section>
         <div class="container mt-4">
-            <?php if (empty($data_lahan)) :?>
-            <div class="row m-5 text-center">
-                <h2 style="color : #b5b3b3;">DATA RIWAYAT KOSONG</h2>
-            </div>
-            <?php endif;?>
-            <?php $i = 0;?>
-            <?php foreach ($data_lahan as $row) :?>
+            <?php $i=0; ?>
+            <?php foreach ($data_keuangan as $row) :?>
             <div class="row mb-3">
                 <div class="card p-0">
                     <div class="card-header bg-success" style="color:white;">
-                        <?=$row["nama_lahan"]?>
+                        <?=$row["asal"]?>
                     </div>
                     <div class="card-body bg-light">
-                        <h5 class="card-title">Tanaman <?=$row["tanaman"]?></h5>
-                        <p class="card-text p-0 m-0">Waktu Penyemaian <span
-                                style="display:inline-block; width: 50px;;"></span>:
-                            &nbsp;&nbsp;<?=$tanggal_penyemaian[$i]["DAY(penyemaian)"], '/' ,$tanggal_penyemaian[$i]["MONTH(penyemaian)"], '/' ,$tanggal_penyemaian[$i]["YEAR(penyemaian)"],'   ' ,$tanggal_penyemaian[$i]["HOUR(penyemaian)"],':' ,$tanggal_penyemaian[$i]["MINUTE(penyemaian)"],' WIB'?>
+                        <p class="card-text p-0 m-0">Tanggal <span
+                                style="display:inline-block; width: 94px;"></span>:&nbsp;&nbsp;&nbsp;<?=$tanggal[$i]["DAY(tanggal)"], '/' ,$tanggal[$i]["MONTH(tanggal)"], '/' ,$tanggal[$i]["YEAR(tanggal)"],'   ' ,$tanggal[$i]["HOUR(tanggal)"],':' ,$tanggal[$i]["MINUTE(tanggal)"],' WIB'?>
                         </p>
-                        <p class="card-text p-0 m-0">Waktu Pertumbuhan <span
-                                style="display:inline-block; width: 40px;"></span>:&nbsp;&nbsp;
-                            <?=$tanggal_pertumbuhan[$i]["DAY(pertumbuhan)"], '/' ,$tanggal_pertumbuhan[$i]["MONTH(pertumbuhan)"], '/' ,$tanggal_pertumbuhan[$i]["YEAR(pertumbuhan)"],'   ' ,$tanggal_pertumbuhan[$i]["HOUR(pertumbuhan)"],':' ,$tanggal_pertumbuhan[$i]["MINUTE(pertumbuhan)"],' WIB'?>
+                        <p class="card-text p-0 m-0">Barang <span
+                                style="display:inline-block; width: 98px;"></span>:&nbsp;&nbsp;&nbsp;<?=$row["barang"]?>
                         </p>
-                        <p class="card-text p-0 m-0">Waktu Panen <span
-                                style="display:inline-block; width: 92px;"></span>:&nbsp;&nbsp;
-                            <?=$tanggal_panen[$i]["DAY(panen)"], '/' ,$tanggal_panen[$i]["MONTH(panen)"], '/' ,$tanggal_panen[$i]["YEAR(panen)"],'   ' ,$tanggal_panen[$i]["HOUR(panen)"],':' ,$tanggal_panen[$i]["MINUTE(panen)"],' WIB'?>
+                        <p class="card-text p-0 m-0">Jumlah Transaksi <span
+                                style="display:inline-block; width: 30px;"></span>:&nbsp;&nbsp;&nbsp;<?=$row["nominal"]?>
                         </p>
-                        <p class="card-text p-0 m-0">Lama Penyemaian <span
-                                style="display:inline-block; width: 58px;;"></span>:
-                            &nbsp;&nbsp;<?=$penyemaian[$i]["selisih"]?>
-                            hari
-                        </p>
-                        <p class="card-text p-0 m-0">Lama Pertumbuhan <span
-                                style="display:inline-block; width: 47px;;"></span>:
-                            &nbsp;&nbsp;<?=$pertumbuhan[$i]["selisih"]?>
-                            hari
-                        </p>
-                        <p class="card-text p-0 m-0">Hasil Panen <span
-                                style="display:inline-block; width: 103px;"></span>:&nbsp;&nbsp;
-                            <?=$row["hasil"]?> pcs</p>
                         <p class="card-text p-0 m-0">Keterangan <span
-                                style="display:inline-block; width: 104px;"></span>:&nbsp;&nbsp;
-                            <?=$row["keterangan"]?>
+                                style="display:inline-block; width: 66px;"></span>:&nbsp;&nbsp;&nbsp;<?=$row["keterangan"]?>
                         </p>
+                        <div class="mt-3 d-flex justify-content-end">
+                            <form action="" method="post">
+                                <input type="hidden" name="id" value="">
+                                <a href="hapuspengeluaran.php?nama=<?=$row["id"]?>" class="btn btn-danger ">Hapus</a>
+                                <a href="ubahpengeluaran.php?nama=<?=$row["id"]?>" class="btn btn-warning ">Ubah</a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <?php $i++;?>
+            <?php $i++; ?>
             <?php endforeach;?>
+            <div class="row justify-content-center">
+                <div class="class pt-5 text-center">
+                    <a href="tambahpengeluaran.php" class="btn btn-success">Tambah Data Transaksi</a>
+                </div>
+            </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#198754" fill-opacity="1"

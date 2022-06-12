@@ -62,6 +62,11 @@ if (isset($_POST["submit"]) ){
                         <a class="nav-link" href="lahan.php">Lahan</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="aktivitas.php">Aktivitas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="keuangan.php">Keuangan</a>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="akun.php">Akun</a>
                     </li>
                 </ul>
